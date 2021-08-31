@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -9,17 +9,18 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
   imports: [
     MailerModule.forRoot({
       transport: {
-        host: process.env.EMAIL_HOST,
-        port: process.env.EMAIL_PORT,
-        secure: false, // true for 465, false for other ports
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true, // true for 465, false for other ports
         auth: {
           user: process.env.EMAIL_ID, // generated ethereal user
-          pass: process.env.EMAIL_PASS // generated ethereal password
+          pass: process.env.EMAIL_PASS, // generated ethereal password
         },
       },
       defaults: {
-        from: '"nest-modules" <user@outlook.com>', // outgoing email ID
+        from: process.env.EMAIL_ID, // outgoing email ID
       },
+      preview: true,
       template: {
         dir: process.cwd() + '/template/',
         adapter: new HandlebarsAdapter(), // or new PugAdapter()
@@ -32,4 +33,4 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
