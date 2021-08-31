@@ -12,13 +12,22 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
         host: 'smtp.gmail.com',
         port: 465,
         secure: true, // true for 465, false for other ports
+        // auth: {
+        //   user: process.env.EMAIL_ID, // generated ethereal user
+        //   pass: process.env.EMAIL_PASS, // generated ethereal password
+        // },
         auth: {
-          user: process.env.EMAIL_ID, // generated ethereal user
-          pass: process.env.EMAIL_PASS, // generated ethereal password
+          type: 'OAuth2',
+          user: process.env.OAUTH_EMAIL_ID,
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          refreshToken: process.env.REFRESH_TOKEN,
+          accessToken: process.env.ACCESS_TOKEN,
         },
       },
       defaults: {
-        from: process.env.EMAIL_ID, // outgoing email ID
+        // from: process.env.EMAIL_ID, // outgoing email ID
+        from: process.env.OAUTH_EMAIL_ID,
       },
       preview: true,
       template: {

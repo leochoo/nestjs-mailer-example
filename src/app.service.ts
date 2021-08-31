@@ -15,7 +15,8 @@ export class AppService {
     this.mailerService
       .sendMail({
         to: process.env.TEST_RECEIVER, // List of receivers email address
-        from: process.env.EMAIL_ID, // Senders email address
+        // from: process.env.EMAIL_ID, // Senders email address
+        from: process.env.OAUTH_EMAIL_ID, // Senders email address
         subject: 'Testing Nest MailerModule ✔', // Subject line
         text: 'welcome', // plaintext body
         html: '<b>welcome</b>', // HTML body content
@@ -33,7 +34,8 @@ export class AppService {
     this.mailerService
       .sendMail({
         to: process.env.TEST_RECEIVER, // List of receivers email address
-        from: process.env.EMAIL_ID, // Senders email address
+        // from: process.env.EMAIL_ID, // Senders email address
+        from: process.env.OAUTH_EMAIL_ID, // Senders email address
         subject: 'Testing Nest Mailermodule with template ✔',
         template: 'index', // The `.pug` or `.hbs` extension is appended automatically.
         context: {
